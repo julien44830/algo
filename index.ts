@@ -1,9 +1,9 @@
 class Arr {
-  value: string[] = [];
+  value: string[] | number[] = [];
   length: number = 0;
 
 
-  pushJulien(el: string): number {
+  pushJulien(el: string | number): number {
     const array = new Array(this.value.length + 1);
 
     for (let i = 0; i < this.value.length; i++) {
@@ -11,11 +11,10 @@ class Arr {
     }
     array[this.value.length] = el;
     this.value = array;
-    this.length = this.value.length;
-    return this.length;
+    return this.value.length;
   }
 
-  popJulien(): string | undefined {
+  popJulien(): string | number {
     const array = new Array(this.value.length - 1)
     for (let i = 0; i < this.value.length; i++) {
       array[i] = this.value[i]
@@ -25,45 +24,83 @@ class Arr {
     return removedElement;
   }
 
-  findIndexJulien (el: string): number | undefined {
-    for (let i = 0; i < this.value.length; i++) {
-      if (this.value[i] === el) {
-        return i
-      }
-    }
-    return undefined
-  };
 
-  reduceJulien(el : number[]):number{
-    let accumulator:number = 0;
-    for(let i = 0 ; i < el.length ; i = i + 1){
-      let currentValue:number = el[i];
-      accumulator = accumulator + currentValue ;
-    }
 
+
+
+
+  reduceJulien(el: number[]): number {
+    let accumulator: number = 0;
+    for (let i = 0; i < el.length; i = i + 1) {
+      let currentValue: number = el[i];
+      accumulator = accumulator + currentValue;
+    }
     return accumulator
   }
+
+  filterJulien(callBack: Function): string[] {
+    let newArrJulien: any = new Array()
+
+    for (let i = 0; i < this.value.length; i++) {
+      if (callBack(this.value[i], i, this.value)) {
+        newArrJulien = i
+      }
+      let j: number = 0;
+      for (let i = 0; i < this.value.length; i++) {
+        if (callBack(this.value[i], i, this.value)) {
+          newArrJulien = this.value[j]
+        }
+      }
+    }
+    return newArrJulien
+  }
+
+
+
+  findIndexJulien(callback: Function): number {
+    for (let i: number = 0; i < this.value.length; i++) {
+      if (callback(this.value[i])) {
+        return i;
+      }
+    }
+    return -1;
+  };
 }
+const arrFindIndex = new Arr();
 
-let test = new Arr();
-console.log('%c⧭', 'color: #ff0000',"pushJulien => ", test);
-test.pushJulien("hello")  // [ 'hello']
-console.log('%c⧭', 'color: #ff0000',"pushJulien => ", test);
-test.pushJulien("word") // [ 'hello', 'word']
-console.log('%c⧭', 'color: #ff0000',"pushJulien => ", test);
-test.pushJulien("victory")  // [ 'hello', 'word', 'victory' ]
-console.log('%c⧭', 'color: #ff0000',"pushJulien => ", test);
+arrFindIndex.pushJulien(1)
+arrFindIndex.pushJulien(5)
+arrFindIndex.pushJulien(9)
+console.log('%c⧭', 'color: #00b300', arrFindIndex.findIndexJulien((e: number) => e > 6));
 
-const testFind = test.findIndexJulien ("victory") // 2
 
-console.log('%c⧭', 'color: #00a3cc',"findIndexJulien => ", testFind);
 
-test.popJulien() // [ 'hello', 'word']
 
-console.log('%c⧭', 'color: #00e600',"popJulien  => ", test.popJulien());
 
-const arrNumb = [1 , 2 , 2 , 5];
-let testArrNumb = new Arr();
-console.log('%c⧭', 'color: #aa00ff',"reduceJulien => " , testArrNumb.reduceJulien(arrNumb));
+
+// let test: any = new Arr();
+// console.log('%c⧭', 'color: #ff0000', "pushJulien => ", test);
+// test.pushJulien("hello")  // [ 'hello']
+// console.log('%c⧭', 'color: #ff0000', "pushJulien => hello ", test);
+// test.pushJulien("wordPlusQue6") // [ 'hello', 'word']
+// console.log('%c⧭', 'color: #ff0000', "pushJulien => word ", test);
+// test.pushJulien("victory")  // [ 'hello', 'word', 'victory' ]
+// console.log('%c⧭', 'color: #ff0000', "pushJulien => victory ", test);
+// console.log('%c⧭', 'color: #917399', "filterJulien =>", test.filterJulien((e: any) => e === "word"));
+
+
+
+// const testFind = test.findIndexJulien("victoryt") // 2
+// console.log('%c⧭', 'color: #00a3cc', "findIndexJulien => victory ", testFind);
+
+
+
+
+// console.log('%c⧭', 'color: #00e600', "popJulien  => ", test.popJulien());
+// console.log('%c⧭', 'color: #ff0000', "pushJulien => ", test);
+
+// const arrNumb = [1, 2, 2, 5];
+// let testArrNumb = new Arr();
+// console.log('%c⧭', 'color: #aa00ff', "reduceJulien => ", testArrNumb.reduceJulien(arrNumb));
 
 export default Arr;
