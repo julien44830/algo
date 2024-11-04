@@ -58,14 +58,41 @@ class Arr {
     }
     return -1;
   };
+
+
+  //index ou placer
+  //nombre element a supp
+  //element a ajouter
+  spliceJulien(a: number, b: number, c: any): any[] {
+    const array = new Array(this.value.length + 1);
+    const result = new Array(b);
+
+    for (let i = 0; i < a; i++) {
+      array[i] = this.value[i]
+    }
+
+    array[a] = c
+    for (let i = a + 1; i < this.value.length; i++) {
+      array[i] = this.value[i]
+    }
+
+    console.log('%c⧭', 'color: #cc0088', array);
+    return result
+  }
+
 }
 
 // test de la methode findIndex()
-const arrFindIndex = new Arr();
+const arr = new Arr();
 
-arrFindIndex.pushJulien(1)
-arrFindIndex.pushJulien(5)
-arrFindIndex.pushJulien(9)
-console.log('%c⧭', 'color: #00b300', arrFindIndex.findIndexJulien((e: number) => e > 6));
+arr.pushJulien(1)
+arr.pushJulien(5)
+arr.pushJulien(9)
+
+
+
+console.log('%c⧭', 'color: #e57373', arr.spliceJulien(1, 0, 7));
+console.log('%c⧭', 'color: #735656', arr);
+// console.log('%c⧭', 'color: #00b300', arr.findIndexJulien((e: number) => e > 6));
 
 export default Arr;
