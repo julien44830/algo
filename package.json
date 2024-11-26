@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest",
         "dev": "ts-node ./index.ts",
+        "traveler": "ts-node ./gridTraveler.ts",
         "fib": "ts-node ./fibonacci.ts"
     },
     "author": "",
